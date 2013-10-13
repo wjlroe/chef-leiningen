@@ -7,9 +7,9 @@
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
-# 
+#
 #     http://www.apache.org/licenses/LICENSE-2.0
-# 
+#
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -17,8 +17,10 @@
 # limitations under the License.
 #
 
+lein_version = node[:leiningen][:version]
+
 remote_file "/usr/local/bin/lein" do
-  source "https://raw.github.com/technomancy/leiningen/5eaad5c48db0668d773e6e964bdb64c30116c370/bin/lein"
+  source "https://raw.github.com/technomancy/leiningen/#{lein_version}/bin/lein"
   mode "755"
   owner "root"
   group "root"
@@ -27,7 +29,7 @@ end
 
 execute "install_leiningen" do
   command "export HTTP_CLIENT='curl --insecure -f -L -o'; lein version"
-  user   node[:lein][:user] 
+  user   node[:lein][:user]
   group  node[:lein][:group]
   environment ({"HOME" => node[:lein][:home]})
 end
